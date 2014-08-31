@@ -1,31 +1,8 @@
-//
-//  GameViewController.swift
-//  GameKitDelegationExample
-//
-//  Created by Andrew & Courtney Bancroft on 8/30/14.
-//  Copyright (c) 2014 Andrew Bancroft. All rights reserved.
-//
-
 import UIKit
 import SpriteKit
+import GameKit
 
-extension SKNode {
-    class func unarchiveFromFile(file : NSString) -> SKNode? {
-        if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
-            var sceneData = NSData.dataWithContentsOfFile(path, options: .DataReadingMappedIfSafe, error: nil)
-            var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
-            
-            archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
-            let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as GameScene
-            archiver.finishDecoding()
-            return scene
-        } else {
-            return nil
-        }
-    }
-}
-
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, GameSceneDelegate, GKGameCenterControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,11 +18,21 @@ class GameViewController: UIViewController {
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
-            
+			scene.gameSceneDelegate = self
+			
             skView.presentScene(scene)
         }
     }
 
+	func gameCenterSignInTouched() {
+		authenticateLocalPlayer()
+	}
+
+	func leaderboardTouched() {
+		authenticateLocalPlayer()
+		showLeaderboard()
+	}
+	
     override func shouldAutorotate() -> Bool {
         return true
     }
@@ -66,4 +53,53 @@ class GameViewController: UIViewController {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+
+	var gameCenterEnabled: Bool = false
+	var leaderboardIdentifier = "lots.points" // This should actually probably be assigned only by the loadDefaultLeaderboardIdentifierWithCompletionHandler method below in your authenticatLocalPlayer() function
+	
+	
+	func authenticateLocalPlayer() {
+		var localPlayer = GKLocalPlayer.localPlayer()
+		localPlayer.authenticateHandler = {(viewController, error) -> Void in
+			if (viewController != nil) {
+				self.presentViewController(viewController, animated: true, completion: nil)
+			} else {
+				if (GKLocalPlayer().authenticated) {
+					self.gameCenterEnabled = true
+					localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderboardIdentifier : String!, error : NSError!) -> Void in
+						if error != nil {
+							println(error.localizedDescription)
+						} else {
+							self.leaderboardIdentifier = leaderboardIdentifier
+						}
+					})
+				} else {
+					self.gameCenterEnabled = false
+				}
+			}
+		}
+		println(localPlayer)
+		println(leaderboardIdentifier)
+	}
+	
+	func showLeaderboard() {
+		// only show the leaderboard if game center is enabled
+		if self.gameCenterEnabled {
+			let gameCenterViewController = GKGameCenterViewController()
+			gameCenterViewController.gameCenterDelegate = self
+			
+			gameCenterViewController.viewState = GKGameCenterViewControllerState.Leaderboards
+			gameCenterViewController.leaderboardIdentifier = self.leaderboardIdentifier
+			
+			self.presentViewController(gameCenterViewController, animated: true, completion: nil)
+		} else {
+			// Tell the user something useful about the fact that game center isn't enabled on their device
+		}
+		
+	}
+	
+	// MARK: GKGameCenterControllerDelegate Method
+	func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
+		gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
+	}
 }

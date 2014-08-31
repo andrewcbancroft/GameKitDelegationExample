@@ -14,6 +14,7 @@
 		F215488119B241DA007C8DD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F215487F19B241DA007C8DD8 /* Main.storyboard */; };
 		F215488319B241DA007C8DD8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F215488219B241DA007C8DD8 /* Images.xcassets */; };
 		F215488F19B241DA007C8DD8 /* GameKitDelegationExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F215488E19B241DA007C8DD8 /* GameKitDelegationExampleTests.swift */; };
+		F215489919B2444B007C8DD8 /* SKNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F215489819B2444B007C8DD8 /* SKNodeExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		F215488819B241DA007C8DD8 /* GameKitDelegationExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameKitDelegationExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F215488D19B241DA007C8DD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F215488E19B241DA007C8DD8 /* GameKitDelegationExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameKitDelegationExampleTests.swift; sourceTree = "<group>"; };
+		F215489819B2444B007C8DD8 /* SKNodeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNodeExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				F215487719B241DA007C8DD8 /* AppDelegate.swift */,
+				F215489819B2444B007C8DD8 /* SKNodeExtensions.swift */,
 				F215487919B241DA007C8DD8 /* GameScene.sks */,
 				F215487B19B241DA007C8DD8 /* GameScene.swift */,
 				F215487D19B241DA007C8DD8 /* GameViewController.swift */,
@@ -217,6 +220,7 @@
 			files = (
 				F215487C19B241DA007C8DD8 /* GameScene.swift in Sources */,
 				F215487E19B241DA007C8DD8 /* GameViewController.swift in Sources */,
+				F215489919B2444B007C8DD8 /* SKNodeExtensions.swift in Sources */,
 				F215487819B241DA007C8DD8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +409,7 @@
 				F215489419B241DA007C8DD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F215489519B241DA007C8DD8 /* Build configuration list for PBXNativeTarget "GameKitDelegationExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +418,7 @@
 				F215489719B241DA007C8DD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

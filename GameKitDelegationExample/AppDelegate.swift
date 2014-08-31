@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  GameKitDelegationExample
-//
-//  Created by Andrew & Courtney Bancroft on 8/30/14.
-//  Copyright (c) 2014 Andrew Bancroft. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
