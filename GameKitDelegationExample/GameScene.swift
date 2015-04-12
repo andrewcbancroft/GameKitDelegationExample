@@ -25,9 +25,9 @@ class GameScene: SKScene {
         self.addChild(gameCenterSignInLabel)
 		self.addChild(leaderboardLabel)
     }
-    
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        /* Called when a touch begins */
+	
+	override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+		/* Called when a touch begins */
         
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
@@ -54,7 +54,7 @@ class GameScene: SKScene {
 				self.addChild(sprite)
 			}
         }
-    }
+	}
 	
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
